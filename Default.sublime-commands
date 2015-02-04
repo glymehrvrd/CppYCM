@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "SYCM: Goto declaration",
+        "command": "sycm_goto"
+    }
+]
