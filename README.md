@@ -8,15 +8,18 @@ ONLY TESTED ON UBUNTU
 Features
 ==============
 - Semantic code completion,
-    + Provide semantic completion proposals after '.', '->' and '::', done
+    + Provide semantic completion proposals on `.`, `->` and `::`, done
     + Variable type indicator, not yet
 - Error highligting
     + Show error hints in code, done
     + Show errors in panel, not yet
-- goto definition, not yet
+- Goto definition, not yet
 
 Installation
 =============
+
+Set up YCMD
+-------------
 [YCMD] is partially written in C/C++, so you must compile [YCMD] on your platform yourself or get a pre-compiled version. Then you need to copy the following files from compiled [YCMD] to `SYCM/server` folder.
 ```
 ycmd/
@@ -67,11 +70,23 @@ Your SYCM folder should look like this,
 
 [Windows x64 Install Guild](https://github.com/ivankoster/SublimeYouCompleteMe#installation-for-64bit-windows) provides an approach for Windows users to get compiled ycmd.
 
-Ubuntu amd64 users can find compiled ycmd here[https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd](https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd).
+Ubuntu amd64 users can find compiled ycmd here. [https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd](https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd).
+
+Set Sublime Config
+--------------
+To enable prompt on `.`, `->` and `::`, you need to add the following configure to your sublime setting. Or create a file named `C++.sublime-settings` in `Packages/User` with following as its content.
+```JSON
+"auto_complete_triggers":
+[
+    {
+        "characters": ".:>",
+        "selector": "source.c++ - string - comment - constant.numeric"
+    }
+]
+```
 
 
-
-Some codes are from [YcmdCompletion]
+Some codes are from [YcmdCompletion].
 
 License
 ==============
