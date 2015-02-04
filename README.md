@@ -65,7 +65,9 @@ Your SYCM folder should look like this,
 └── sycmcompletion.py
 ```
 
-[Windows x64 Install Guild](https://github.com/ivankoster/SublimeYouCompleteMe#installation-for-64bit-windows) provides an approach for Windows users.
+[Windows x64 Install Guild](https://github.com/ivankoster/SublimeYouCompleteMe#installation-for-64bit-windows) provides an approach for Windows users to get compiled ycmd.
+
+Ubuntu amd64 users can find compiled ycmd here[https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd](https://github.com/glymehrvrd/SYCM/tree/compiled-ycmd).
 
 
 
