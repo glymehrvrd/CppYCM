@@ -13,7 +13,7 @@ Features
 - Error highligting
     + Show error hints in code, done
     + Show errors in panel, not yet
-- Goto definition, not yet
+- Goto definition, done
 
 Installation
 =============

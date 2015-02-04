@@ -115,10 +115,12 @@ class YcmdHandle(object):
 
     def SendGoToRequest(self,
                         filepath,
+                        contents,
                         filetype,
                         line_num,
                         column_num):
         request_json = BuildRequestData(filepath=filepath,
+                                        contents=contents,
                                         command_arguments=['GoTo'],
                                         filetype=filetype,
                                         line_num=line_num,

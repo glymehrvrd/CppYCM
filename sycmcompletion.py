@@ -56,6 +56,23 @@ def load_extra_conf_func(server, filepath):
     server.LoadExtraConfFile(conf_path)
 
 
+def goto_func(server, filepath, contents, row, col, callback):
+    '''
+    Thread that send goto declaration
+    '''
+    rst = server.SendGoToRequest(filepath=filepath,
+                                 contents=contents,
+                                 filetype='cpp',
+                                 line_num=23,
+                                 column_num=4)
+    if rst == '':
+        return
+    data = json.loads(rst)
+    row = data.get('line_num', 1) - 1
+    col = data.get('column_num', 1) - 1
+    callback(row, col)
+
+
 def notification_func(server, filepath, contents, callback):
     '''
     Thread that send event notification
@@ -241,3 +258,42 @@ class SYCMCompletions(sublime_plugin.EventListener):
             regions=regions,
             scope='invalid',
             flags=style)
+
+
+class SycmGoto(sublime_plugin.TextCommand):
+
+    '''
+    Goto command
+    '''
+
+    def run(self, edit):
+        # get 1-based location
+        row, col = self.view.rowcol(self.view.sel()[0].begin())
+        row = row + 1
+        col = col + 1
+
+        filepath = get_file_path(self.view.file_name())
+        contents = self.view.substr(sublime.Region(0, self.view.size()))
+
+        # start goto thread
+        t = Thread(None, goto_func, 'GotoAsync',
+                   [server(), filepath, contents, row, col, self._goto])
+        t.daemon = True
+        t.start()
+
+    def is_enabled(self):
+        ''' 
+        Determine if this command is enabled or not
+        '''
+
+        return is_cpp(self.view)
+
+    def _goto(self, row, col):
+        '''
+        Goto declaration callback
+        '''
+        point = self.view.text_point(row, col)
+        region = self.view.word(point)
+        self.view.sel().clear()
+        self.view.sel().add(region)
+        self.view.show_at_center(region)
