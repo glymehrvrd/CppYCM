@@ -2,5 +2,9 @@
     {
         "caption": "SYCM: Goto declaration",
         "command": "sycm_goto"
+    },
+    {
+        "caption": "SYCM: Highlight problems",
+        "command": "sycm_highlight_problems"
     }
 ]

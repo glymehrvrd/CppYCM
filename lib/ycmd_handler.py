@@ -15,6 +15,32 @@ from urllib.parse import urljoin
 from urllib.error import HTTPError
 
 from .utils import *
+from .msgs import MsgTemplates
+
+_server = None
+
+
+def server(filepath=None):
+    '''
+    return singleton server instance and load extra configuration.
+    '''
+    global _server
+    if not _server and filepath:
+        # load server
+        _server = YcmdHandle.StartYcmdAndReturnHandle()
+        _server.WaitUntilReady()
+        print(MsgTemplates.LOAD_SERVER_FINISHED.format(
+              _server._server_location))
+
+        # load extra_conf
+        conf_path = find_recursive(filepath)
+        _server.LoadExtraConfFile(conf_path)
+        print(MsgTemplates.LOAD_EXTRA_CONF_FINISHED)
+        
+    if not _server:
+        raise RuntimeError(MsgTemplates.SERVER_NOT_LOADED)
+    return _server
+
 
 HMAC_HEADER = 'X-Ycm-Hmac'
 HMAC_SECRET_LENGTH = 16
@@ -183,7 +209,6 @@ class YcmdHandle(object):
             resp = urlopen(req)
         except HTTPError as err:
             readData = err.read().decode('utf-8')
-            # print(readData)
             print('[SYCM] Error from ycmd server: {}'.format(
                 json.loads(readData).get('message', '')))
             return ''

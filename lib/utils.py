@@ -1,13 +1,32 @@
 import os
 import sublime
 
+
 def get_plugin_path():
-    plugin_path = os.path.join(sublime.packages_path(), 'SYCM')
+    '''
+    Get path of the SYCM plugin
+    '''
+    plugin_path = os.path.abspath(os.path.join(sublime.packages_path(), 'SYCM'))
     return plugin_path
 
+
 def get_ycmd_path():
+    '''
+    Get path of the ycmd server
+    '''
     ycmd_path = os.path.join(get_plugin_path(), 'server', 'ycmd')
     return ycmd_path
+
+
+def get_file_path(filepath=None):
+    '''
+    Get path of the editing file. 
+    '''
+    if not filepath:
+        filepath = active_view().file_name()
+    if not filepath:
+        filepath = 'tmpfile.cpp'
+    return filepath
 
 
 def find_recursive(path):
@@ -28,7 +47,7 @@ def find_recursive(path):
 
 def is_cpp(view):
     '''
-    Determine if the given view location is c++ code
+    Determine if the given view is c++ code
     '''
     try:
         return view.match_selector(view.sel()[0].begin(), 'source.c++')
@@ -37,27 +56,41 @@ def is_cpp(view):
 
 
 def active_view():
+    '''
+    return active view
+    '''
     return sublime.active_window().active_view()
 
 
-def get_file_path(filepath=None):
-    '''
-    Get path of the editing file. 
-    '''
-    if not filepath:
-        filepath = active_view().file_name()
-    if not filepath:
-        filepath = 'tmpfile.cpp'
-    return filepath
-
-
-def get_selected_pos(view):
+def get_row_col(view, location=None):
     '''
     return 1-based row and column of selected region
+    if location is None, set location to cursor location.
     '''
     try:
-        row, col = view.rowcol(view.sel()[0].end())
+        if not location:
+            location = view.sel()[0].begin()
+        row, col = view.rowcol(location)
         return (row + 1, col + 1)
     except:
         return None
 
+def update_statusbar(self, view, view_line, view_cache, force=False):
+    row, col = get_row_col(view)
+    view_id = view.id()
+    text_point = view.text_point(row, col)
+
+    if not force:
+        beg, end = view_line.get(view_id, (None, None))
+        if beg and end and sublime.Region(beg, end).contains(text_point):
+            return
+
+    errors_regions = view_cache.get(view_id, {}).get(row, {})
+    for region, msg in errors_regions.items():
+        if sublime.Region(*region).contains(text_point) and msg:
+            view.set_status('clang-code-errors', msg)
+            view_line[view_id] = region
+            return
+    if view_id in view_line:
+        del view_line[view_id]
+    view.erase_status('clang-code-errors')

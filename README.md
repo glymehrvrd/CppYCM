@@ -1,6 +1,6 @@
-SYCM
+SYCM (SublimeYouCompleteMe)
 ==============
-This is a Sublime Text 3 plugin aims at providing C/C++ IDE features such as semantic code completion, error highligting and goto definition.
+This is a Sublime Text 3 plugin aims at providing C/C++ IDE features such as semantic code completion, error highligting, goto definition and more.
 [YCMD] is used as the backend server.
 
 ONLY TESTED ON UBUNTU
@@ -12,7 +12,8 @@ Features
     + Variable type indicator, not yet
 - Error highligting
     + Show error hints in code, done
-    + Show errors in panel, not yet
+    + Show errors in panel, done
+    + Jump to corresponding error in source when clicking problems panel, not yet.
 - Goto definition, done
 
 Installation
