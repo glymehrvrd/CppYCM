@@ -6,7 +6,8 @@ def get_plugin_path():
     '''
     Get path of the SYCM plugin
     '''
-    plugin_path = os.path.abspath(os.path.join(sublime.packages_path(), 'SYCM'))
+    plugin_path = os.path.abspath(
+        os.path.join(sublime.packages_path(), 'SYCM'))
     return plugin_path
 
 
@@ -27,6 +28,10 @@ def get_file_path(filepath=None):
     if not filepath:
         filepath = 'tmpfile.cpp'
     return filepath
+
+
+def check_ycmd_server():
+    return os.path.exists(get_ycmd_path())
 
 
 def find_recursive(path):
@@ -74,6 +79,7 @@ def get_row_col(view, location=None):
         return (row + 1, col + 1)
     except:
         return None
+
 
 def update_statusbar(self, view, view_line, view_cache, force=False):
     row, col = get_row_col(view)

@@ -36,39 +36,12 @@ ycm_core.so
 Your SYCM folder should look like this,
 ```
 .
+├── commands
 ├── lib
-│   ├── utils.py
-│   ├── ycmd_events.py
-│   └── ycmd_handler.py
-├── LICENSE
-├── marker.png
-├── README.md
-├── server
-│   ├── libclang.so
-│   ├── third_party
-│       └── ...
-│   ├── ycm_client_support.so
-│   ├── ycm_core.so
-│   └── ycmd
-│       ├── completers
-│       ├── default_settings.json
-│       ├── extra_conf_store.py
-│       ├── handlers.py
-│       ├── hmac_plugin.py
-│       ├── identifier_utils.py
-│       ├── __init__.py
-│       ├── __main__.py
-│       ├── request_validation.py
-│       ├── request_wrap.py
-│       ├── responses.py
-│       ├── responses.pyc
-│       ├── server_state.py
-│       ├── server_utils.py
-│       ├── tests
-│       ├── user_options_store.py
-│       ├── utils.py
-│       └── watchdog_plugin.py
-└── sycmcompletion.py
+├── listeners
+└── server    <----- create and put compiled ycmd into this folder
+    ├── third_party
+    └── ycmd
 ```
 
 [Windows x64 Install Guild](https://github.com/ivankoster/SublimeYouCompleteMe#installation-for-64bit-windows) provides an approach for Windows users to get compiled ycmd.
