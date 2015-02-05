@@ -16,6 +16,8 @@ Features
     + Jump to corresponding error in source when clicking problems panel, not yet.
 - Goto definition, done
 
+![demo](https://raw.githubusercontent.com/glymehrvrd/SYCM/compiled-ycmd/demo.gif)
+
 Installation
 =============
 
