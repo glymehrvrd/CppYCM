@@ -11,7 +11,7 @@ from .commands import *
 
 def plugin_loaded():
     if not check_ycmd_server():
-        sublime.message_dialog('Ycmd is not found, see https://github.com/glymehrvrd/SYCM#installation for install instructions.')
+        sublime.message_dialog('Ycmd is not found, see https://github.com/glymehrvrd/CppYCM#installation for install instructions.')
 
 
 def plugin_unloaded():

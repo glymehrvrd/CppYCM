@@ -7,7 +7,7 @@ from ..lib.ycmd_handler import server
 from ..lib.utils import *
 from ..lib.msgs import MsgTemplates
 
-class SYCMHighlightProblemsListener(sublime_plugin.EventListener):
+class CppYCMHighlightProblemsListener(sublime_plugin.EventListener):
 
     def on_selection_modified_async(self, view):
         if not is_cpp(view) or view.is_scratch():
@@ -18,5 +18,5 @@ class SYCMHighlightProblemsListener(sublime_plugin.EventListener):
         if not is_cpp(view) or view.is_scratch():
             return
         # run highlight problems command
-        view.window().run_command('sycm_highlight_problems')
+        view.window().run_command('cppycm_highlight_problems')
         

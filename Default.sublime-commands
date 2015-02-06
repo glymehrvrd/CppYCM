@@ -1,10 +1,10 @@
 [
     {
-        "caption": "SYCM: Goto declaration",
-        "command": "sycm_goto"
+        "caption": "CppYCM: Goto declaration",
+        "command": "cppycm_goto"
     },
     {
-        "caption": "SYCM: Highlight problems",
-        "command": "sycm_highlight_problems"
+        "caption": "CppYCM: Highlight problems",
+        "command": "cppycm_highlight_problems"
     }
 ]

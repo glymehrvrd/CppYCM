@@ -1,11 +1,11 @@
 
-from .autocomplete import SYCMCompletionsListener
-from .highlight_problems import SYCMHighlightProblemsListener
-from .loadextraconf import SYCMLoadExtraConfListener
+from .autocomplete import CppYCMCompletionsListener
+from .highlight_problems import CppYCMHighlightProblemsListener
+from .loadextraconf import CppYCMLoadExtraConfListener
 
 
 __all__ = [
-    'SYCMCompletionsListener',
-    'SYCMHighlightProblemsListener',
-    'SYCMLoadExtraConfListener'
+    'CppYCMCompletionsListener',
+    'CppYCMHighlightProblemsListener',
+    'CppYCMLoadExtraConfListener'
 ]

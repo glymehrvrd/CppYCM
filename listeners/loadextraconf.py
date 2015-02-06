@@ -12,10 +12,11 @@ def load_extra_conf_func(server, filepath):
     Thread that loads extra conf
     '''
     conf_path = find_recursive(filepath)
+    server.WaitUntilReady()
     server.LoadExtraConfFile(conf_path)
     print(MsgTemplates.LOAD_EXTRA_CONF_FINISHED)
 
-class SYCMLoadExtraConfListener(sublime_plugin.EventListener):
+class CppYCMLoadExtraConfListener(sublime_plugin.EventListener):
     '''
     Activate ycmd server and loads extra_conf on cpp file loaded.
     '''
@@ -27,7 +28,7 @@ class SYCMLoadExtraConfListener(sublime_plugin.EventListener):
             return
         # if is cpp, activate ycmd server
         server(view.file_name())
-        # t = Thread(None, load_extra_conf_func, 'LoadExtraConfAsync',
-        #            [server(), get_file_path(view.file_name())])
-        # t.daemon = True
-        # t.start()
+        t = Thread(None, load_extra_conf_func, 'LoadExtraConfAsync',
+                   [server(), get_file_path(view.file_name())])
+        t.daemon = True
+        t.start()

@@ -31,12 +31,6 @@ def server(filepath=None):
         _server.WaitUntilReady()
         print(MsgTemplates.LOAD_SERVER_FINISHED.format(
               _server._server_location))
-
-        # load extra_conf
-        conf_path = find_recursive(filepath)
-        _server.LoadExtraConfFile(conf_path)
-        print(MsgTemplates.LOAD_EXTRA_CONF_FINISHED)
-        
     if not _server:
         raise RuntimeError(MsgTemplates.SERVER_NOT_LOADED)
     return _server
@@ -54,9 +48,6 @@ CODE_COMPLETIONS_HANDLER = '/completions'
 COMPLETER_COMMANDS_HANDLER = '/run_completer_command'
 EVENT_HANDLER = '/event_notification'
 EXTRA_CONF_HANDLER = '/load_extra_conf_file'
-
-YCMD_SERVER_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..', 'server', 'ycmd'))
 
 # Wrapper around ycmd's HTTP+JSON API
 
@@ -83,8 +74,8 @@ class YcmdHandle(object):
             json.dump(prepared_options, options_file)
             options_file.flush()
             server_port = GetUnusedLocalhostPort()
-            ycmd_args = ['python',
-                         YCMD_SERVER_PATH,
+            ycmd_args = [get_python_path(),
+                         get_ycmd_path(),
                          '--port={0}'.format(server_port),
                          '--options_file={0}'.format(options_file.name),
                          '--idle_suicide_seconds={0}'.format(
@@ -209,7 +200,7 @@ class YcmdHandle(object):
             resp = urlopen(req)
         except HTTPError as err:
             readData = err.read().decode('utf-8')
-            print('[SYCM] Error from ycmd server: {}'.format(
+            print('[CppYCM] Error from ycmd server: {}'.format(
                 json.loads(readData).get('message', '')))
             return ''
 

@@ -1,6 +1,6 @@
 [
     {
         "button": "button1", "count": 1, "modifiers": ["ctrl", "alt"],
-        "press_command": "sycm_goto"
+        "press_command": "cppycm_goto"
     }
 ]

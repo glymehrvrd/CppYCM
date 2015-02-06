@@ -35,7 +35,7 @@ def complete_func(server, filepath, contents, row, col, callback):
     callback(data)
 
 
-class SYCMCompletionsListener(sublime_plugin.EventListener):
+class CppYCMCompletionsListener(sublime_plugin.EventListener):
 
     def __init__(self):
         self.completions = []
@@ -59,7 +59,7 @@ class SYCMCompletionsListener(sublime_plugin.EventListener):
         if thischar == ':' and leftchar != ':':
             return
 
-        print("[SYCM] Start completing.")
+        print("[CppYCM] Start completing.")
 
         if self.ready_from_defer is True:
             cpl = self.completions

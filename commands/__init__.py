@@ -1,9 +1,9 @@
 
-from .goto import SycmGotoCommand
-from .highlight_problems import SycmHighlightProblemsCommand
+from .goto import CppycmGotoCommand
+from .highlight_problems import CppycmHighlightProblemsCommand
 
 
 __all__ = [
-    'SycmGotoCommand',
-    'SycmHighlightProblemsCommand'
+    'CppycmGotoCommand',
+    'CppycmHighlightProblemsCommand'
 ]

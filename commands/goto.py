@@ -23,7 +23,7 @@ def goto_func(server, filepath, contents, row, col, callback):
     callback(row, col)
 
 
-class SycmGotoCommand(sublime_plugin.TextCommand):
+class CppycmGotoCommand(sublime_plugin.TextCommand):
 
     '''
     Goto command
@@ -37,7 +37,7 @@ class SycmGotoCommand(sublime_plugin.TextCommand):
 
         # start goto thread
         t = Thread(None, goto_func, 'GotoAsync',
-                   [server(), filepath, contents, row, col-1, self._goto])
+                   [server(), filepath, contents, row, col, self._goto])
         t.daemon = True
         t.start()
 

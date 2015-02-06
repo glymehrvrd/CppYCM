@@ -1,5 +1,5 @@
 [
-    {"command": "sycm_goto", "keys": ["g", "d"],
+    {"command": "cppycm_goto", "keys": ["g", "d"],
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "source.c++" },

@@ -22,7 +22,7 @@ def notification_func(server, filepath, contents, callback):
     callback(data)
 
 
-class SycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
+class CppycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
 
     '''
     Goto command
@@ -31,8 +31,8 @@ class SycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
     def __init__(self, window):
         self.window = window
         self.output_panel = self.window.create_output_panel(
-            'SYCM.{}'.format(self.window.id()))
-        self.output_panel_name = 'output.SYCM.{}'.format(self.window.id())
+            'CppYCM.{}'.format(self.window.id()))
+        self.output_panel_name = 'output.CppYCM.{}'.format(self.window.id())
 
     def run(self):
         view = active_view()

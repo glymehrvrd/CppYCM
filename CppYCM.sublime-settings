@@ -1,0 +1,4 @@
+{
+    "python_path": "python",
+    "ycmd_path": "${packages}/CppYCM/server"
+}

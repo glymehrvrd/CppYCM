@@ -4,10 +4,10 @@ import sublime
 
 def get_plugin_path():
     '''
-    Get path of the SYCM plugin
+    Get path of the CppYCM plugin
     '''
     plugin_path = os.path.abspath(
-        os.path.join(sublime.packages_path(), 'SYCM'))
+        os.path.join(sublime.packages_path(), 'CppYCM'))
     return plugin_path
 
 
@@ -15,8 +15,20 @@ def get_ycmd_path():
     '''
     Get path of the ycmd server
     '''
-    ycmd_path = os.path.join(get_plugin_path(), 'server', 'ycmd')
+    settings = sublime.load_settings('CppYCM.sublime-settings')
+    ycmd_path = settings.get('ycmd_path', os.path.join(
+        get_plugin_path(), 'server')).replace('${packages}', sublime.packages_path())
+    ycmd_path = os.path.join(ycmd_path, 'ycmd')
     return ycmd_path
+
+
+def get_python_path():
+    '''
+    Get path of python
+    '''
+    settings = sublime.load_settings('CppYCM.sublime-settings')
+    python_path = settings.get('python_path', 'python')
+    return python_path
 
 
 def get_file_path(filepath=None):
