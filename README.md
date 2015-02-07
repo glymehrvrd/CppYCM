@@ -51,11 +51,14 @@ To enable prompt on `.`, `->` and `::`, you need to add the following configure 
 ]
 ```
 
+Make your own `.ycm_extra_conf.py`
+--------------
+Ycmd uses `.ycm_extra_conf.py` to get compilation flags and other information. See [c-family-semantic-completion-engine-usage] for details.
+CppYCM will try to load `.ycm_extra_conf.py` from all directories in and above opened file. If `.ycm_extra_conf.py` is not found, all functions will *NOT* work.
+
 License
 ==============
 Copyright 2015 Glyme Water. Licensed under the MIT License.
 
-Some codes are from [YcmdCompletion].
-
 [YCMD]: https://github.com/Valloric/ycmd
-[YcmdCompletion]: https://github.com/LuckyGeck/YcmdCompletion
+[c-family-semantic-completion-engine-usage]: https://valloric.github.io/YouCompleteMe/#c-family-semantic-completion-engine-usage

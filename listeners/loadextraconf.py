@@ -12,6 +12,11 @@ def load_extra_conf_func(server, filepath):
     Thread that loads extra conf
     '''
     conf_path = find_recursive(filepath)
+    if not conf_path:
+        sublime.status_message('[CppYCM] .ycm_extra_conf.py not found. All CppYCM function not avaliable.')
+        print('[CppYCM] .ycm_extra_conf.py not found.')
+        return
+
     server.WaitUntilReady()
     server.LoadExtraConfFile(conf_path)
     print(MsgTemplates.LOAD_EXTRA_CONF_FINISHED)

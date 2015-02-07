@@ -59,7 +59,7 @@ def find_recursive(path):
             break
         else:
             path = parent_dir
-    return ''
+    return None
 
 
 def is_cpp(view):
