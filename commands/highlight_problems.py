@@ -84,8 +84,9 @@ class CppycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
             line_regions[(region.a, region.b)] = message
 
         self.output_panel.set_read_only(True)
-        self.window.run_command(
-            'show_panel', {'panel': self.output_panel_name})
+        if problems:
+            self.window.run_command(
+                'show_panel', {'panel': self.output_panel_name})
         # self.view_cache[view_id] = view_cache
         style = (sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE |
                  sublime.DRAW_SQUIGGLY_UNDERLINE)
