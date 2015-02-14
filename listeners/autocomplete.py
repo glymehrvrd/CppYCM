@@ -59,7 +59,7 @@ class CppYCMCompletionsListener(sublime_plugin.EventListener):
         if thischar == ':' and leftchar != ':':
             return
 
-        print("[CppYCM] Start completing.")
+        print("[C++YouCompleteMe] Start completing.")
 
         if self.ready_from_defer is True:
             cpl = self.completions

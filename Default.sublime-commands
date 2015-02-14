@@ -1,10 +1,10 @@
 [
     {
-        "caption": "CppYCM: Goto declaration",
+        "caption": "C++YouCompleteMe: Goto declaration",
         "command": "cppycm_goto"
     },
     {
-        "caption": "CppYCM: Highlight problems",
+        "caption": "C++YouCompleteMe: Highlight problems",
         "command": "cppycm_highlight_problems"
     }
 ]

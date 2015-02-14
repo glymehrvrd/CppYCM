@@ -1,4 +1,4 @@
-CppYCM (CppYouCompleteMe)
+C++YouCompleteMe
 ==============
 This is a Sublime Text 3 plugin aims at providing C/C++ IDE features such as semantic code completion, error highligting, goto definition and more.
 [YCMD] is used as the backend server.
@@ -54,7 +54,7 @@ To enable prompt on `.`, `->` and `::`, you need to add the following configure 
 Make your own `.ycm_extra_conf.py`
 --------------
 Ycmd uses `.ycm_extra_conf.py` to get compilation flags and other information. See [c-family-semantic-completion-engine-usage] for details.
-CppYCM will try to load `.ycm_extra_conf.py` from all directories in and above opened file. If `.ycm_extra_conf.py` is not found, all functions will *NOT* work.
+C++YouCompleteMe will try to load `.ycm_extra_conf.py` from all directories in and above opened file. If `.ycm_extra_conf.py` is not found, all functions will *NOT* work.
 
 License
 ==============

@@ -200,7 +200,7 @@ class YcmdHandle(object):
             resp = urlopen(req)
         except HTTPError as err:
             readData = err.read().decode('utf-8')
-            print('[CppYCM] Error from ycmd server: {}'.format(
+            print('[C++YouCompleteMe] Error from ycmd server: {}'.format(
                 json.loads(readData).get('message', '')))
             return ''
 

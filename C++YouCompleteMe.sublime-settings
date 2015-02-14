@@ -1,5 +1,5 @@
 {
     "python_path": "python",
-    "ycmd_path": "${packages}/CppYCM/server",
+    "ycmd_path": "${packages}/C++YouCompleteMe/server",
     "highlight_errors_on_save": false
 }

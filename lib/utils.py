@@ -4,10 +4,10 @@ import sublime
 
 def get_plugin_path():
     '''
-    Get path of the CppYCM plugin.
+    Get path of the C++YouCompleteMe plugin.
     '''
     plugin_path = os.path.abspath(
-        os.path.join(sublime.packages_path(), 'CppYCM'))
+        os.path.join(sublime.packages_path(), 'C++YouCompleteMe'))
     return plugin_path
 
 
@@ -15,7 +15,7 @@ def get_ycmd_path():
     '''
     Get path of the ycmd server.
     '''
-    settings = sublime.load_settings('CppYCM.sublime-settings')
+    settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
     ycmd_path = settings.get('ycmd_path', os.path.join(
         get_plugin_path(), 'server')).replace('${packages}', sublime.packages_path())
     ycmd_path = os.path.join(ycmd_path, 'ycmd')
@@ -26,7 +26,7 @@ def get_python_path():
     '''
     Get path of python.
     '''
-    settings = sublime.load_settings('CppYCM.sublime-settings')
+    settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
     python_path = settings.get('python_path', 'python')
     return python_path
 
@@ -46,7 +46,7 @@ def check_highlight_on_save():
     '''
     Get if highlight on save.
     '''
-    settings = sublime.load_settings('CppYCM.sublime-settings')
+    settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
     rst = settings.get('highlight_errors_on_save', False)
     return rst
 
