@@ -4,7 +4,7 @@ import sublime
 
 def get_plugin_path():
     '''
-    Get path of the CppYCM plugin
+    Get path of the CppYCM plugin.
     '''
     plugin_path = os.path.abspath(
         os.path.join(sublime.packages_path(), 'CppYCM'))
@@ -13,7 +13,7 @@ def get_plugin_path():
 
 def get_ycmd_path():
     '''
-    Get path of the ycmd server
+    Get path of the ycmd server.
     '''
     settings = sublime.load_settings('CppYCM.sublime-settings')
     ycmd_path = settings.get('ycmd_path', os.path.join(
@@ -24,7 +24,7 @@ def get_ycmd_path():
 
 def get_python_path():
     '''
-    Get path of python
+    Get path of python.
     '''
     settings = sublime.load_settings('CppYCM.sublime-settings')
     python_path = settings.get('python_path', 'python')
@@ -33,7 +33,7 @@ def get_python_path():
 
 def get_file_path(filepath=None):
     '''
-    Get path of the editing file. 
+    Get path of the editing file.
     '''
     if not filepath:
         filepath = active_view().file_name()
@@ -42,13 +42,25 @@ def get_file_path(filepath=None):
     return filepath
 
 
+def check_highlight_on_save():
+    '''
+    Get if highlight on save.
+    '''
+    settings = sublime.load_settings('CppYCM.sublime-settings')
+    rst = settings.get('highlight_errors_on_save', False)
+    return rst
+
+
 def check_ycmd_server():
+    '''
+    Check if ycmd server exists.
+    '''
     return os.path.exists(get_ycmd_path())
 
 
 def find_recursive(path):
     '''
-    find ycm_extra_conf in path and all directories above it.
+    Find ycm_extra_conf in path and all directories above it.
     '''
     path = os.path.dirname(path)
     while(True):
@@ -74,15 +86,15 @@ def is_cpp(view):
 
 def active_view():
     '''
-    return active view
+    Return active view
     '''
     return sublime.active_window().active_view()
 
 
 def get_row_col(view, location=None):
     '''
-    return 1-based row and column of selected region
-    if location is None, set location to cursor location.
+    Return 1-based row and column of selected region
+    If location is None, set location to cursor location.
     '''
     try:
         if not location:
@@ -93,22 +105,39 @@ def get_row_col(view, location=None):
         return None
 
 
-def update_statusbar(self, view, view_line, view_cache, force=False):
-    row, col = get_row_col(view)
-    view_id = view.id()
-    text_point = view.text_point(row, col)
+# def get_classname(view):
+#     p = view.sel()[0].begin()
+#     if 'meta.class-struct-block.c++' in view.scope_name(p):
+#         classes = view.find_by_selector('meta.class-struct-block.c++')
+#         entities = view.find_by_selector('entity.name.type.c++')
+#         for i in range(len(classes)):
+#             if classes[i].begin() <= p and classes[i].end() >= p:
+#                 index = i
+#                 for j in range(i + 1, len(classes)):
+#                     if classes[j].begin() <= p and classes[j].end() >= p:
+#                         index = j
+#                     else:
+#                         break
+#                 return entities[index]
+#     return None
 
-    if not force:
-        beg, end = view_line.get(view_id, (None, None))
-        if beg and end and sublime.Region(beg, end).contains(text_point):
-            return
 
-    errors_regions = view_cache.get(view_id, {}).get(row, {})
-    for region, msg in errors_regions.items():
-        if sublime.Region(*region).contains(text_point) and msg:
-            view.set_status('clang-code-errors', msg)
-            view_line[view_id] = region
-            return
-    if view_id in view_line:
-        del view_line[view_id]
-    view.erase_status('clang-code-errors')
+# def update_statusbar(self, view, view_line, view_cache, force=False):
+#     row, col = get_row_col(view)
+#     view_id = view.id()
+#     text_point = view.text_point(row, col)
+
+#     if not force:
+#         beg, end = view_line.get(view_id, (None, None))
+#         if beg and end and sublime.Region(beg, end).contains(text_point):
+#             return
+
+#     errors_regions = view_cache.get(view_id, {}).get(row, {})
+#     for region, msg in errors_regions.items():
+#         if sublime.Region(*region).contains(text_point) and msg:
+#             view.set_status('clang-code-errors', msg)
+#             view_line[view_id] = region
+#             return
+#     if view_id in view_line:
+#         del view_line[view_id]
+#     view.erase_status('clang-code-errors')

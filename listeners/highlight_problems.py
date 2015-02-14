@@ -18,5 +18,6 @@ class CppYCMHighlightProblemsListener(sublime_plugin.EventListener):
         if not is_cpp(view) or view.is_scratch():
             return
         # run highlight problems command
-        view.window().run_command('cppycm_highlight_problems')
+        if check_highlight_on_save():
+            view.window().run_command('cppycm_highlight_problems')
         
