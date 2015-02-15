@@ -8,6 +8,8 @@ from ..lib.utils import *
 from ..lib.ycmd_events import Event
 from ..lib.msgs import MsgTemplates
 
+output_panel = None
+
 
 def notification_func(server, filepath, contents, callback):
     '''
@@ -29,10 +31,13 @@ class CppycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
     '''
 
     def __init__(self, window):
+        global output_panel
         self.window = window
         self.output_panel = self.window.create_output_panel(
             'CppYCM.{}'.format(self.window.id()))
         self.output_panel_name = 'output.CppYCM.{}'.format(self.window.id())
+        self.output_panel.set_syntax_file(get_error_panel_syntax_file())
+        output_panel = self.output_panel
 
     def run(self):
         view = active_view()
@@ -84,6 +89,8 @@ class CppycmHighlightProblemsCommand(sublime_plugin.WindowCommand):
             line_regions[(region.a, region.b)] = message
 
         self.output_panel.set_read_only(True)
+        self.output_panel.run_command(
+            'move_to', {'to': 'bof', 'extend': False})
         if problems:
             self.window.run_command(
                 'show_panel', {'panel': self.output_panel_name})

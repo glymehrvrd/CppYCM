@@ -1,5 +1,7 @@
 {
     "python_path": "python",
-    "ycmd_path": "${packages}/C++YouCompleteMe/server",
-    "highlight_errors_on_save": false
+    "ycmd_path": "Packages/C++YouCompleteMe/server",
+    "highlight_errors_on_save": false,
+    "select_after_goto": false,
+    "error_panel_syntax_file": "Packages/C++YouCompleteMe/ErrorPanel.tmLanguage"
 }

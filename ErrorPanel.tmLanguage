@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+	</array>
+	<key>name</key>
+	<string>C++YouCompleteMeErrorPanel</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>Warnings</string>
+			<key>match</key>
+			<string>^\[C\+\+YouCompleteMe\] > \[WARNING\] .*$</string>
+			<key>name</key>
+			<string>string.cppycm.warning</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Errors</string>
+			<key>match</key>
+			<string>^\[C\+\+YouCompleteMe\] > \[ERROR\] .*$</string>
+			<key>name</key>
+			<string>string.cppycm.error</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.cppycm.errorpanel</string>
+	<key>uuid</key>
+	<string>2e18d5f4-b4d6-11e4-a71e-12e3f512a338</string>
+</dict>
+</plist>

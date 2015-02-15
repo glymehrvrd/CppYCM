@@ -6,6 +6,7 @@ from threading import Thread
 from ..lib.ycmd_handler import server
 from ..lib.utils import *
 
+
 def goto_func(server, filepath, contents, row, col, callback):
     '''
     Thread that send goto declaration
@@ -53,7 +54,8 @@ class CppycmGotoCommand(sublime_plugin.TextCommand):
         Goto declaration callback
         '''
         point = self.view.text_point(row, col)
-        region = self.view.word(point)
+        region = self.view.word(
+            point) if check_select_after_goto() else sublime.Region(point, point)
         self.view.sel().clear()
         self.view.sel().add(region)
         self.view.show_at_center(region)

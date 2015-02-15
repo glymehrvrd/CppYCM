@@ -17,7 +17,7 @@ def get_ycmd_path():
     '''
     settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
     ycmd_path = settings.get('ycmd_path', os.path.join(
-        get_plugin_path(), 'server')).replace('${packages}', sublime.packages_path())
+        get_plugin_path(), 'server'))
     ycmd_path = os.path.join(ycmd_path, 'ycmd')
     return ycmd_path
 
@@ -41,6 +41,12 @@ def get_file_path(filepath=None):
         filepath = 'tmpfile.cpp'
     return filepath
 
+def get_error_panel_syntax_file():
+    settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
+    filepath = settings.get('error_panel_syntax_file',  os.path.join(
+        get_plugin_path(), 'ErrorPanel.tmLanguage'))
+    return filepath
+
 
 def check_highlight_on_save():
     '''
@@ -48,6 +54,15 @@ def check_highlight_on_save():
     '''
     settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
     rst = settings.get('highlight_errors_on_save', False)
+    return rst
+
+
+def check_select_after_goto():
+    '''
+    Get if select element after goto command.
+    '''
+    settings = sublime.load_settings('C++YouCompleteMe.sublime-settings')
+    rst = settings.get('select_after_goto', False)
     return rst
 
 

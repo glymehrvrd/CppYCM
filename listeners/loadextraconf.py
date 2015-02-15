@@ -7,13 +7,15 @@ from ..lib.ycmd_handler import server
 from ..lib.utils import *
 from ..lib.msgs import MsgTemplates
 
+
 def load_extra_conf_func(server, filepath):
     '''
     Thread that loads extra conf
     '''
     conf_path = find_recursive(filepath)
     if not conf_path:
-        sublime.status_message('[C++YouCompleteMe] .ycm_extra_conf.py not found. All C++YouCompleteMe function not avaliable.')
+        sublime.status_message(
+            '[C++YouCompleteMe] .ycm_extra_conf.py not found. All C++YouCompleteMe function not avaliable.')
         print('[C++YouCompleteMe] .ycm_extra_conf.py not found.')
         return
 
@@ -21,10 +23,13 @@ def load_extra_conf_func(server, filepath):
     server.LoadExtraConfFile(conf_path)
     print(MsgTemplates.LOAD_EXTRA_CONF_FINISHED)
 
+
 class CppYCMLoadExtraConfListener(sublime_plugin.EventListener):
+
     '''
     Activate ycmd server and loads extra_conf on cpp file loaded.
     '''
+
     def on_activated_async(self, view):
         '''
         Called when a view gains input focus.
