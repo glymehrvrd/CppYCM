@@ -15,7 +15,7 @@
 			<key>match</key>
 			<string>^\[C\+\+YouCompleteMe\] > \[WARNING\] .*$</string>
 			<key>name</key>
-			<string>string.cppycm.warning</string>
+			<string>string.quoted.double.c</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -23,7 +23,7 @@
 			<key>match</key>
 			<string>^\[C\+\+YouCompleteMe\] > \[ERROR\] .*$</string>
 			<key>name</key>
-			<string>string.cppycm.error</string>
+			<string>keyword.control.c</string>
 		</dict>
 	</array>
 	<key>scopeName</key>
