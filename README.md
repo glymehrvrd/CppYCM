@@ -13,7 +13,7 @@ Features
 - Error highligting
     + Show error hints in code, done
     + Show errors in panel, done
-    + Jump to corresponding error in source when clicking problems panel, not yet.
+    + ~~Jump to corresponding error in source when clicking problems panel, not yet.~~ It seems ST3 wouldn't call on_selection_modified for output panel, so this feature can't be implemented. Maybe a detour will apply.
 - Goto definition, done
 
 ![demo](https://raw.githubusercontent.com/glymehrvrd/CppYCM/compiled-ycmd/demo.gif)
@@ -54,7 +54,7 @@ To enable prompt on `.`, `->` and `::`, you need to add the following configure 
 Make your own `.ycm_extra_conf.py`
 --------------
 Ycmd uses `.ycm_extra_conf.py` to get compilation flags and other information. See [c-family-semantic-completion-engine-usage] for details.
-C++YouCompleteMe will try to load `.ycm_extra_conf.py` from all directories in and above opened file. If `.ycm_extra_conf.py` is not found, all functions will *NOT* work.
+C++YouCompleteMe will try to load `.ycm_extra_conf.py` from the directory holding the opened file and all directories above it. If `.ycm_extra_conf.py` is not found, all functions will *NOT* work.
 
 License
 ==============
