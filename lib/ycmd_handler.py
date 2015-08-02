@@ -194,7 +194,12 @@ class YcmdHandle(object):
             req.add_header('content-type', 'application/json')
             data = json.dumps(data, ensure_ascii=False)
         data = data.encode('utf-8')
-        req.add_header(HMAC_HEADER, self._HmacForBody(data))
+        request_hmac = self._HmacForBody(b''.join([
+            self._HmacForBody(method.encode('utf-8')),
+            self._HmacForBody(urljoin('/', handler).encode('utf-8')),
+            self._HmacForBody(data),
+        ]), to_base64=True)
+        req.add_header(HMAC_HEADER, request_hmac)
         req.data = data
         try:
             resp = urlopen(req)
@@ -210,12 +215,14 @@ class YcmdHandle(object):
 
         return readData.decode('utf-8')
 
-    def _HmacForBody(self, request_body):
+    def _HmacForBody(self, request_body, to_base64=False):
         '''
         @return bytes
         bytes request_body
+        bool to_base64
         '''
-        return b64encode(CreateHexHmac(request_body, self._hmac_secret))
+        ret = CreateHexHmac(request_body, self._hmac_secret)
+        return b64encode(ret) if to_base64 else ret
 
     def _ValidateResponseObject(self, content, hmac_header):
         '''
@@ -237,7 +244,7 @@ def CreateHexHmac(content, hmac_secret):
     # Must ensure that hmac_secret is bytes and not unicode
     return hmac.new(hmac_secret,
                     msg=content,
-                    digestmod=hashlib.sha256).hexdigest().encode('utf-8')
+                    digestmod=hashlib.sha256).digest()
 
 
 def ContentHexHmacValid(content, hmac_secret, hmac_str):
