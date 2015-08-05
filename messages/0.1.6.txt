@@ -1,0 +1,2 @@
+ATTENTION:
+The communication protocol of the lastest ycmd server changed, and this plugin has been modified to adapt to the lastest ycmd server. Please download the lastest ycmd server from "https://github.com/glymehrvrd/CppYCM/tree/compiled-ycmd" or compile it yourself.
