@@ -7,6 +7,34 @@ from ..lib.ycmd_handler import server
 from ..lib.utils import *
 from ..lib.msgs import MsgTemplates
 
+def create_abbrev(signature):
+    sb = ''
+    startParam = False
+    argumentIndex = 1
+    for i in range(0, len(signature)):
+        c = signature[i]
+        if c == ',':
+            sb = sb + "}"
+            startParam = True; 
+            sb = sb + c
+        elif c == '(':
+            startParam = True; 
+            sb = sb + c
+        elif c == ')':
+            if not startParam: # Case of 'f()' - no parameters
+                sb = sb + "}"
+            sb = sb + c
+        elif c == ' ' or c == '\t' or c == '\n':
+            sb = sb + c
+        else:
+            if startParam:
+                startParam = False
+                sb = sb + '${'
+                sb = sb + str(argumentIndex)
+                argumentIndex = argumentIndex + 1
+                sb = sb + ':'
+            sb = sb + c
+    return sb
 
 def complete_func(server, filepath, contents, row, col, callback):
     '''
@@ -25,12 +53,18 @@ def complete_func(server, filepath, contents, row, col, callback):
     data = []
     for comp in completions:
         for detailed_info in comp.get('detailed_info', '').strip().split('\n'):
+            insertion_text = comp.get('insertion_text', '')
+            if comp.get('kind', '') == 'FUNCTION':
+                index_of_lbracket = detailed_info.find('(')
+                index_of_rbracket = detailed_info.find(')')
+                if index_of_lbracket >= 0 and index_of_rbracket > index_of_lbracket:
+                    insertion_text = insertion_text + create_abbrev(detailed_info[index_of_lbracket:index_of_rbracket + 1])
             data.append(
                 (
                     '{}\t{}'.format(detailed_info,
                                     comp.get('kind', '').lower()
                                     ),
-                    comp.get('insertion_text', '')
+                    insertion_text
                 )
             )
     callback(data)
